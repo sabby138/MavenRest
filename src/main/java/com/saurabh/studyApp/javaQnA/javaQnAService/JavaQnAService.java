@@ -11,14 +11,16 @@ import com.saurabh.studyApp.javaQnA.model.JavaQnADO;
 import com.saurabh.studyApp.utilities.FileReadingUtility;
 
 @Path("/javaQnA")
+@Produces(MediaType.APPLICATION_JSON)
 public class JavaQnAService {
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<JavaQnADO> getAllJavaQuestions(){
-		
+	public JavaQnADO getAllJavaQuestions(){
+		JavaQnADO javaQnADO = new JavaQnADO();
 			List<JavaQnADO> questList = FileReadingUtility.readQuestionsFromFile();
-		return questList;
-		
+			javaQnADO.setQuestList(questList);
+			javaQnADO.setListTitle("Java Questions");
+		return javaQnADO;
+		 
 	}
 }
